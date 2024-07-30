@@ -1,0 +1,12 @@
+.home {
+    height: 50vh;
+    margin: 0;
+    background-color: aquamarine;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow-y: hidden;
+}

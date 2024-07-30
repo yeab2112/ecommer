@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background-color:green;
+    color: white;
+    padding-inline: 45px;
+
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbrand {
+    font-size: 1.8rem;
+    margin-right: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.nave-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+.nave-link:hover{
+    text-decoration: underline;
+}

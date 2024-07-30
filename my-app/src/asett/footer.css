@@ -1,0 +1,27 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background-color:green;
+    color: white;
+    padding-inline: 45px;}
+
+  .social-links {
+display: flex;   
+ padding: 0;
+  }
+
+  .social-links  {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  .social-links a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .social-links svg {
+    font-size: 1.2em; 
+  }
+  
