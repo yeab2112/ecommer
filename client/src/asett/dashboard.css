@@ -1,0 +1,108 @@
+
+  
+  .sidebar {
+    width: 20%;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+}
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    display: block;
+  }
+  
+  .sidebar li {
+    margin-bottom: 20px;
+  }
+  
+  h1{
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .sidebar a:hover {
+    background-color: hsl(0, 19%, 91%);
+  }
+  
+  .content {
+    padding: 20px;
+    width: 80%;
+    display: block;
+
+ }
+  
+  .content h1 {
+    margin-top: 5px;
+    align-items: center;
+    margin-left: 300px;
+  }
+  .admin-dashboard {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    border: 1px solid #ccc;
+    display: flex;
+  }
+
+  
+  
+  .contact-table {
+    width: 50%;
+    border-collapse: collapse;
+    padding: 50px;
+    margin-left: 120px;
+
+  }
+  
+  .contact-table th,
+  .contact-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  
+  
+  /* Additional Styling for Buttons */
+  /* .admin-dashboard button {
+    padding: 8px 16px;
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+   */
+ 
+  
+  
+  /* .admin-dashboard h1,
+  .admin-dashboard h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  } */
+ 
+  
+ 
+  
+  .contact-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+  
+  /* Additional Styling for Buttons */
+ 
+/*   
+  .admin-dashboard button:hover {
+    background-color: #3e8e41;
+  }
+     */

@@ -1,0 +1,127 @@
+.product{
+     display: grid;
+     flex-wrap: wrap;
+     gap: 20px; /* Add spacing between items */
+     grid-template-rows: auto 1fr;
+     padding-bottom: 150px;
+
+   }
+ul{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  width: 100%;
+}
+
+.product-card {
+     width: 200px;
+     /* Adjust card width as needed */
+     border-radius: 10px;
+     overflow: hidden;
+     width: 200px; /* Adjust card width as needed */
+     border-radius: 10px;
+     overflow: hidden; 
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+     background-color: #08455023; /* White background */
+     margin: 20px; /* Add margin for spacing */
+     color: #333; /* Add text color */
+     text-align: center; /* Center text */
+     padding: 15px; 
+}
+
+.product-card img {
+     width: 60%;
+     height: 10x;
+     /* Adjust image height as needed */
+     object-fit: cover;
+     margin-top: 20px;
+     margin-left: 40px;
+     object-fit: cover; /* Ensures the image covers the entire area without distortion */
+
+}
+
+.info {
+     padding: 15px;
+}
+
+.product-card h3 {
+     margin-top: 20;
+     color: #333;
+}
+
+.product-card p {
+     color: #666;
+     margin-bottom: 10px;
+}
+.product-card button {
+     background-color: #4CAF50; /* Green background */
+     border: none;
+     color: white;
+     padding: 8px 16px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 14px;
+     margin: 4px 2px;
+     border-radius: 5px;
+     cursor: pointer; /* Add cursor for click interaction */
+   }
+   
+   .product-card button:hover {
+     background-color: #45a049; /* Darker green on hover */
+   }
+   
+   .product-card button:active {
+     background-color: #3e8e41; /* Even darker green on click */
+   }
+   
+   .product-card button.delete {
+     background-color: #f44336; /* Red background for delete */
+   }
+   
+   .product-card button.delete:hover {
+     background-color: #d32f2f; /* Darker red on hover */
+   }
+   
+   .product-card button.delete:active {
+     background-color: #c62828; /* Even darker red on click */
+   }
+   
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+     .product-card {
+       width: calc(50% - 10px); 
+     }
+   }
+   
+   @media (max-width: 480px) {
+     .product-card {
+       width: 100%;
+     }
+   }
+
+   .search-input {
+    width: 300px; /* Adjust the width as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 50px;
+    margin-left:40%;
+    box-sizing: border-box; /* Include padding and border in the width */
+    transition: border-color 0.2s ease; /* Smooth transition for focus effect */
+  }
+  
+  .search-input:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #007bff; /* Change border color on focus (blue) */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Add a subtle focus shadow */
+  }
+  
+  .search-input::placeholder {
+    /* Style the placeholder text */
+    color: #999;
+  }
+ul p{
+    align-items: center;
+  }

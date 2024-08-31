@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+/* .header {
+    color: white;
+    padding: 20px;
+    background-color: #ff4500;
+   } */
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background-color:green;
+    color: white;
+    padding-inline: 45px;
+
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbrand {
+    font-size: 1.8rem;
+    margin-right: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.nave-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    text-align: right;
+}
+.nave-link:hover{
+    text-decoration: underline;
+}
+.button {
+    background-color: #1f1caa; /* Tomato color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+   }
+   .hero-button:hover {
+    background-color: hsl(145, 86%, 37%); /* Darker tomato */
+   }
+   

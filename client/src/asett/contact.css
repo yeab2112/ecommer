@@ -1,0 +1,85 @@
+/* .home{
+    display: flex;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(138, 141, 133);
+    height: 92vh;
+    align-items:  center;
+    color: black;
+    padding-inline: 30px;
+}
+.home-title{
+    font-size: 2rem;
+    margin-bottom: 10px;
+    word-spacing: 1%;
+
+}
+.home-description{
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+} */
+ .container {
+    height: 100vh;
+    margin: 0;
+    background-color:aliceblue;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 0;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form {
+    background-color: blueviolet;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgb(43, 33, 33);
+    padding: 20px;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+
+}
+.form-group {
+    margin-bottom: 15px;
+}
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+
+}
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    }
+    .form-button{
+        padding: 10px;
+        width: 100%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        background-color: brown;
+    }
+        .successMessage{
+            text-align: center;
+            margin-bottom: 8px;  
+         
+             justify-content: center;
+        }
+    label{
+margin-top: 5px;
+    }
