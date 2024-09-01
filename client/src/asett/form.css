@@ -52,8 +52,15 @@ h2 {
 .pay-button{
 margin-top: 20%;
 margin-left: 20%;
+width: 50px;}
+.peyment-method{
+margin-top: 100px;
 }
 
+.enter-amount{
+margin-top: 30px;
+margin-left: 40%;
+}
 
 
 .form-label {

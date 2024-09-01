@@ -1,26 +1,22 @@
-import Stripe from 'stripe';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const stripe = new Stripe(process.env.stripe_secret_key);
+import { Order } from "../moduls/order.js";
 
 
 const Payment= async (req, res) => {
-    const { amount } = req.body;
 
     try {
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount,
-            currency: 'usd', // Change this to your desired currency
-        });
+        const { totalPrice, paymentMethod} = req.body;
 
-        // Send the client secret back to the client
-        res.send({ id: paymentIntent.client_secret });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ error: 'Payment failed. Please try again later.' });
-    }
-};
+         if (!totalPrice || !paymentMethod ) {
+         return res.status(400).json({ error: 'Missing required fields' })};
+         {
+        const newOrder = new Order({ totalPrice,paymentMethod });
+        
+        await newOrder.save();
+        
+        res.status(201).json({ message: 'Order submitted successfully' }) };
+         }catch (error) {
+        console.error('Error saving order:', error);
+        res.status(500).json({ error: 'Failed to submit order' });
+        }}
 
 export{Payment}

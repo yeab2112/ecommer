@@ -13,7 +13,7 @@ function EditProduct() {
     const fetchProduct = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://127.0.0.1:5001/api/product/" + productId
+        const response = await fetch("http://127.0.0.1:5000/api/product/" + productId
           , {
             method: 'GET'
           });
@@ -36,7 +36,7 @@ function EditProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:5001/api/product/" + productId
+      const response = await fetch("http://127.0.0.1:5000/api/product/" + productId
         , {
         method: 'PUT',
         headers: {

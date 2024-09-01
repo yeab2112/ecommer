@@ -37,7 +37,7 @@ const CheckoutForm = () => {
 
     return (
         <form onSubmit={handlePayment}>
-            <input 
+            <input className='enter-amount'
                 type="number" 
                 value={amount} 
                 onChange={(e) => setAmount(e.target.value)} 

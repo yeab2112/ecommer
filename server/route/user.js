@@ -12,9 +12,10 @@ import { verifyUser } from "../middleware/autho.js"
 import { Auth } from "../controller/user.js"
 import { Search } from "../controller/product.js"
 import {broductDetail} from "../controller/product.js"
-import { Orders } from "../controller/shipping.js"
+import { Shipping } from "../controller/shipping.js"
 import { Carts } from "../controller/cart.js"
 import { Payment } from "../controller/payment.js"
+import { OrderPlace } from "../controller/orderplace.js"
 import { OrderSummry } from "../controller/orderSummry.js"
 const router=express.Router()
 
@@ -42,9 +43,11 @@ router.get('/verify', verifyUser, Auth);
 router.get('/contact', Contactt);  
 router.get('/search', Search);  
 router.get('/productdetail/:id',broductDetail);
-router.post('/checkout',Orders);
 router.post('/cart',Carts)
-router.post('/api/payments/create-payment-intent',Payment)
+router.post('/payment',Payment)
+router.post('/OrderPlace',OrderPlace)
+router.post('/shipping',Shipping)
+
 router.get('/orderSummry',OrderSummry)
 
   // Authenticati,on middleware

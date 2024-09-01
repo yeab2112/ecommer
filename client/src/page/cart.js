@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 function Cart() {
   const { cart, dispatch } = useContext(cartcontext);
   // const { user} = useContext(AuthContext);
-
   // Save cart to local storage when cart changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));

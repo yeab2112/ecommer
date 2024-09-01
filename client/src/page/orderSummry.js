@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {  useParams } from 'react-router-dom';
 
-function AdminOrderSummary({ orderId }) {
+function AdminOrderSummary() {
   const [orderDetails, setOrderDetails] = useState(null);
+  const { orderId } = useParams(); 
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -35,7 +37,6 @@ function AdminOrderSummary({ orderId }) {
     <div>
       <h2>Order Summary</h2>
 
-      {/* Product Details */}
       <h3>Products</h3>
       <ul>
         {products.map((product, index) => (

@@ -8,6 +8,10 @@ import '../asett/shop.css'
 function Shop() {
   const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState([]);
+  const [filters, setFilters] = useState({
+    prand: '',
+    category: '',
+  })
   const [isLoading, setIsLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
 
@@ -15,12 +19,12 @@ function Shop() {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  
+
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true); // Set loading to true
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/search?name=${searchTerm}`);
+        const response = await fetch(`http://127.0.0.1:5000/api/search?searchText=${searchTerm}&prand=${filters.prand ?? ''}&category=${filters.category ?? ''}`);
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
@@ -35,7 +39,7 @@ function Shop() {
     };
 
     fetchProducts();
-  }, [searchTerm]);
+  }, [searchTerm, filters]);
   const handleDeleteProduct = async (productId) => {
     try {
       const response = await fetch("http://127.0.0.1:5000/api/product/" + productId
@@ -57,10 +61,32 @@ function Shop() {
 
   return (
     <>
-      <input
-        type="text" value={searchTerm}
-        className="search-input"
-        onChange={handleSearchChange} placeholder="Search products..." />
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        <select onChange={(e) => {
+          if (e.target.value == 'all') {
+            setFilters({ ...filters, prand: '' })
+          }
+          else {
+            setFilters({ ...filters, prand: e.target.value })
+          }
+
+        }}>
+          <option value='all'>
+            ALL
+          </option>
+          <option value={'lenvo'}>
+            lenvo
+          </option>
+          <option value={'samsung'}>
+            samsung
+          </option>
+
+        </select>
+        <input
+          type="text" value={searchTerm}
+          className="search-input"
+          onChange={handleSearchChange} placeholder="Search products..." />
+      </div>
       <h2>Product List</h2>
 
       {isLoading && <p>Loading products...</p>}

@@ -106,8 +106,6 @@ ul{
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    margin-top: 50px;
-    margin-left:40%;
     box-sizing: border-box; /* Include padding and border in the width */
     transition: border-color 0.2s ease; /* Smooth transition for focus effect */
   }
