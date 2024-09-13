@@ -15,7 +15,7 @@ const CheckoutForm = ({
 
 
     return (
-        <div className='form-continer-address'>
+        <div >
             <form className='form-address'>
                 <h2>Shipping Deteils</h2>
                 <div className='form-group'>

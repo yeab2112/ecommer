@@ -80,7 +80,8 @@ const[quantity,setQuantity]=useState()
                 <Route path="addproduct" element={<Addproduct />} />
                 <Route path="contactget" element={<Contactget />} />
                 <Route path="shop" element={<Shop />} />
-                <Route path="orders" element={< AdminOrderSummary/>}/>
+                <Route path="orders" element={ <AdminOrderSummary 
+                orderId="647538f9284f453d96132145" />}/>
               </Route>
               <Route path="/products/edit/:productId" element={<EditProduct />} />
               <Route path="/product/:productId" element={<ProductDetails />} />

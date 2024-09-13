@@ -10,11 +10,11 @@ function Footer() {
                 <p>[YEABSIRA] [2023]</p>
                 <div >
 
-                    <Link to="https://www.linkedin.com/in/yeabsira-aychiluhim-299311320/" className='social-links '>
+                    <Link to="https://www.linkedin.com/in/yeabsira-aychiluhim/" className='social-links '>
                         <FontAwesomeIcon icon={faLinkedin} /></Link>
 
 
-                    <Link to="[Your GitHub URL]"  className='social-links '>
+                    <Link to="https://github.com/yeab2112/ecommer"  className='social-links '>
                         <FontAwesomeIcon icon={faGithub} />
                     </Link>
 

@@ -12,7 +12,7 @@ const cartReducer = (state, action) => {
      );
      }
     //  If it doesn't exist, add it to the cart with quantity 1
-     return [...state, { ...action.product, quantity: 1}];
+      return [...state, { ...action.product, quantity: 1 }]; 
     
      case 'Remove':
      return state.filter(p => p._id !== action._id);

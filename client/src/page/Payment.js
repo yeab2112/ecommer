@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../asett/form.css';
 
 const Payment = ({ paymentMethod, setPaymentMethod }) => {
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [totalItem, setTotalItem] = useState(0)
+ 
 
   // Function to get cart items from local storage
-  const getCartItemsFromLocalStorage = () => {
-    const cartItems = localStorage.getItem('cart'); // Replace 'cart' with your actual key
-    return cartItems ? JSON.parse(cartItems) : []; // Parse JSON or return an empty array if not found
-  };
+ 
 
   // Calculate total price when component mounts
-  useEffect(() => {
-    const cart = getCartItemsFromLocalStorage();
-    const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    setTotalPrice(total);
-    const sum = cart.reduce((acc, item) => acc + item.quantity, 0)
-    setTotalItem(sum)
-  }, []);
+  
 
   return (
     <div>
@@ -45,11 +35,7 @@ const Payment = ({ paymentMethod, setPaymentMethod }) => {
           className='form-controlp'
         />
       </div>
-      <div className='total-price'>
-        <h3>Total Price: ${totalPrice.toFixed(2)}</h3>
-        <h3>Total Item: {totalItem}</h3>
-
-      </div>
+      
 
     </div>
   );
