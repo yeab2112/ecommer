@@ -106,10 +106,21 @@ ul{
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    margin-left: 120px;
     box-sizing: border-box; /* Include padding and border in the width */
-    transition: border-color 0.2s ease; /* Smooth transition for focus effect */
+    transition: border-color 0.2s ease; 
+    /* Smooth transition for focus effect */
   }
-  
+  .input-filtter{
+    margin-left: 20px;
+    margin-right: 60px;
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding and border in the width */
+  }
   .search-input:focus {
     outline: none; /* Remove default focus outline */
     border-color: #007bff; /* Change border color on focus (blue) */

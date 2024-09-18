@@ -1,45 +1,44 @@
-import React from 'react'
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Auth } from '../App';
-// import ProductSearch from './page/search.js';
-// import axios from 'axios';
-import '../asett/shop.css'
+import '../asett/shop.css';
+
 function Shop() {
   const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState([]);
   const [filters, setFilters] = useState({
-    prand: '',
     category: '',
-  })
-  const [isLoading, setIsLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const { role } = useContext(Auth)
+  const { role } = useContext(Auth);
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   useEffect(() => {
     const fetchProducts = async () => {
-      setIsLoading(true); // Set loading to true
+      setIsLoading(true);
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/search?searchText=${searchTerm}&prand=${filters.prand ?? ''}&category=${filters.category ?? ''}`);
+        const response = await fetch(`http://127.0.0.1:5000/api/search?searchText=${searchTerm}&category=${filters.category ?? ''}`);
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
         const data = await response.json();
         setProducts(data);
-        setError(null); // Clear any previous error
+        setError(null);
       } catch (error) {
         setError(error);
       } finally {
-        setIsLoading(false); // Set loading to false after fetching or error
+        setIsLoading(false);
       }
     };
 
     fetchProducts();
   }, [searchTerm, filters]);
+
   const handleDeleteProduct = async (productId) => {
     try {
       const response = await fetch("http://127.0.0.1:5000/api/product/" + productId
@@ -61,38 +60,27 @@ function Shop() {
 
   return (
     <>
-      <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-        <select onChange={(e) => {
-          if (e.target.value == 'all') {
-            setFilters({ ...filters, prand: '' })
-          }
-          else {
-            setFilters({ ...filters, prand: e.target.value })
-          }
-
-        }}>
-          <option value='all'>
-            ALL
-          </option>
-          <option value={'lenvo'}>
-            lenvo
-          </option>
-          <option value={'samsung'}>
-            samsung
-          </option>
-
+      <div >
+        <select className='input-filtter' onChange={(e) => setFilters({ ...filters, category: e.target.value })}>
+          <option value=''>ALL CATEGORIES</option>
+          <option value='electronics'>Electronics</option>
+          <option value='clothing'>Clothing</option>
+          <option value='home-appliances'>Home Appliances</option>
+          {/* Add more categories as needed */}
         </select>
         <input
-          type="text" value={searchTerm}
+          type="text"
+          value={searchTerm}
           className="search-input"
-          onChange={handleSearchChange} placeholder="Search products..." />
+          onChange={handleSearchChange}
+          placeholder="Search products..."
+        />
       </div>
       <h2>Product List</h2>
 
       {isLoading && <p>Loading products...</p>}
       {error && <p>Error: {error.message}</p>}
       <div className='product'>
-
         <ul>
           {products.length > 0 ? (
             products.map((product) => (
@@ -105,27 +93,23 @@ function Shop() {
                   <h3 className="product-name">{product.name}</h3>
                   <p className="product-price">${product.price}</p>
                 </div>
-                {role === 'admin' && <>
+                {role === 'admin' && (
                   <div className="buttons">
-
-
                     <Link to={`/products/edit/${product._id}`}>
                       <button>Update</button>
                     </Link>
-                    <button onClick={() => handleDeleteProduct(product._id)}>
-                      Delete
-                    </button>
+                    <button onClick={() => handleDeleteProduct(product._id)}>Delete</button>
                   </div>
-                </>}
+                )}
               </li>
             ))
           ) : (
-            <p className="no-results">No products found.</p>
+            <p>No products found.</p>
           )}
         </ul>
-
-      </div >
+      </div>
     </>
   );
 }
-export default Shop
+
+export default Shop;

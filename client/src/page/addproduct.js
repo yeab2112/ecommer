@@ -6,8 +6,8 @@ const Addproduct = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [descrption, setDescription] = useState('');
-    const [prand, setPrand] = useState('');
-    const [catagory, setCategory] = useState('');
+    const [brand, setPrand] = useState('');
+    const [category, setCategory] = useState('');
     const [image, setImage] = useState('');
 
     const [message, setMessage] = useState('');
@@ -19,8 +19,8 @@ const Addproduct = () => {
             price: parseFloat(price),
             image,
             descrption,
-            prand,
-            catagory,
+            brand,
+            category,
         };
         try {
             const response = await fetch('http://127.0.0.1:5000/api/product', {
@@ -39,7 +39,6 @@ const Addproduct = () => {
                     autoClose: 5000
                 })
                 setMessage(`Product added successfully`);
-                // Reset form fields
                 setName('');
                 setPrice('');
                 setImage('');
@@ -78,18 +77,18 @@ const Addproduct = () => {
                         required
                     />
                 </div><div className='form-group'>
-                    <label className='form-label'>Catagory:</label>
+                    <label className='form-label'>Category:</label>
                     <input className='form-control' id='name'
                         type="text"
-                        value={catagory}
+                        value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         required
                     />
                 </div><div className='form-group'>
-                    <label className='form-label'>Prand:</label>
+                    <label className='form-label'>Brand:</label>
                     <input className='form-control' id='name'
                         type="text"
-                        value={prand}
+                        value={brand}
                         onChange={(e) => setPrand(e.target.value)}
                         required
                     />

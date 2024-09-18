@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../asett/form.css'; // Ensure this path is correct for your CSS file
+import '../asett/form.css'; 
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 
 const CheckoutForm = () => {
@@ -17,7 +17,7 @@ const CheckoutForm = () => {
 
         try {
             const { data: clientSecret } = await axios.post('/api/payments/create-payment-intent', {
-                amount: amount * 100, // Convert to cents
+                amount: amount * 100,
             });
 
             const cardElement = elements.getElement(CardElement);
