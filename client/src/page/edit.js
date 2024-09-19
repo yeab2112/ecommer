@@ -46,6 +46,10 @@ function EditProduct() {
           name: product.name,
           price: product.price,
           image: product.image,
+          price:product.price,
+          descrption:product.descrption,
+          brand:product.brand,
+          category:product.category,
         }),
       });
 
@@ -103,6 +107,35 @@ function EditProduct() {
             id="image"
             name="image"
             value={product.image}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="brand" className='form-label'>Brand:</label>
+          <input className='form-control'
+            type="text"
+            id="brand"
+            name="brand"
+            value={product.brand}
+            onChange={handleChange}
+          />
+        </div><div>
+          <label htmlFor="descrption" className='form-label'>Descrption:</label>
+          <input className='form-control'
+            type="text"
+            id="descrption"
+            name="descrption"
+            value={product.descrption}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="category" className='form-label'>Category:</label>
+          <input className='form-control'
+            type="text"
+            id="category"
+            name="category"
+            value={product.category}
             onChange={handleChange}
           />
         </div>

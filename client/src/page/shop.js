@@ -61,7 +61,7 @@ function Shop() {
   return (
     <>
       <div >
-        <select className='input-filtter' onChange={(e) => setFilters({ ...filters, category: e.target.value })}>
+        <select className='input-filtter'onChange={(e) => setFilters({ ...filters, category: e.target.value })}>
           <option value=''>ALL CATEGORIES</option>
           <option value='electronics'>Electronics</option>
           <option value='clothing'>Clothing</option>
