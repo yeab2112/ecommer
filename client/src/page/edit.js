@@ -44,7 +44,6 @@ function EditProduct() {
         },
         body: JSON.stringify({
           name: product.name,
-          price: product.price,
           image: product.image,
           price:product.price,
           descrption:product.descrption,

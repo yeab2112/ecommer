@@ -2,10 +2,18 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Auth } from '../App';
 import '../asett/shop.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 function Shop() {
-  const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState([]);
+
+  const [currentPage,setCurrentPage]=useState()
+  const recoredsPerPage=3;
+  const lastIndex=currentPage*recoredsPerPage;
+  const firstIndex=lastIndex-recoredsPerPage;
+  const records=products.slice(firstIndex,lastIndex);
+  const npage=Math.ceil(products.length/recoredsPerPage)
+  const numbers=[...Array(npage+1).keys()].slice(1)
+  const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     category: '',
   });
@@ -66,7 +74,7 @@ function Shop() {
           <option value='electronics'>Electronics</option>
           <option value='clothing'>Clothing</option>
           <option value='home-appliances'>Home Appliances</option>
-          {/* Add more categories as needed */}
+          <option value='furniture'>Furniture</option>
         </select>
         <input
           type="text"
@@ -83,7 +91,7 @@ function Shop() {
       <div className='product'>
         <ul>
           {products.length > 0 ? (
-            products.map((product) => (
+            records.map((product) => (
               <li key={product._id} className='product-card'>
                 <Link to={`/product/${product._id}`}>
                   <img src={product.image} alt={product.name} className="product-image" />
@@ -107,9 +115,44 @@ function Shop() {
             <p>No products found.</p>
           )}
         </ul>
+        <nav>
+          <ul className='pagination'>
+
+       <li className='page-item'>
+<a href='#' className='page-link' onClick={prePage}>prev</a>
+       </li>
+       {
+        numbers.map((n,i)=>(
+          <li className={`${currentPage===n ?'active':""}`}
+          key={i}>
+          <a href='#' className='page-link'
+           onClick={()=>changePage(n)}>{n}</a>
+          </li>
+        ))
+      }
+      <li className='page-item'>
+<a href='#' className='page-link' onClick={nextPage}>Next</a>
+       </li>
+          </ul>
+        </nav>
       </div>
     </>
+
   );
+  function prePage(){
+if(currentPage!==1){
+  setCurrentPage(currentPage-1)
+}
+  }
+   function changePage(id){
+setCurrentPage(id)
+   }
+  function nextPage(){
+if(currentPage!==npage){
+  setCurrentPage(currentPage+1)
+}
+  }
+  
 }
 
 export default Shop;
