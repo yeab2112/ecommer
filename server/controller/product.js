@@ -14,13 +14,13 @@ export { getAllProducts }
 
 const Products = async (req, res) => {
   try {
-    const { name, price, image, prand, descrption, catagory } = req.body;
+    const { name, price, image, brand, descrption, category } = req.body;
 
     if (!name || !price || !image) {
       return res.status(400).json({ error: 'Missing required fields' })
     };
     {
-      const newProduct = new Product({ name, price, image, prand, descrption, catagory });
+      const newProduct = new Product({ name, price, image, brand, descrption, category });
 
       await newProduct.save();
 
@@ -83,29 +83,29 @@ const getProductById = async (req, res) => {
 export { getProductById }
 
 const Search = async (req, res) => {
-  const { searchText, name, prand, catagory, priceMin, priceMax, price } = req.query;
+  const { searchText, name, brand, category, priceMin, priceMax, price } = req.query;
 
   let query = {};
 
-  // Handling 'searchText' to match with 'name', 'prand', or 'catagory'
+  // Handling 'searchText' to match with 'name', 'brand', or 'category'
   if (searchText) {
     query.$or = [
       { name: { $regex: searchText, $options: 'i' } },
-      { prand: { $regex: searchText, $options: 'i' } },
-      { catagory: { $regex: searchText, $options: 'i' } }
+      { brand: { $regex: searchText, $options: 'i' } },
+      { category: { $regex: searchText, $options: 'i' } }
     ];
   }
+
   // Handling specific fields if searchText is not provided
   if (name) {
     query.name = { $regex: name, $options: 'i' };
   }
-  if (prand) {
-    query.prand = prand;
+  if (brand) {
+    query.brand = brand; // Assuming exact match for brand
   }
-  if (catagory) {
-    query.catagory = catagory;
+  if (category) {
+    query.category = category; // Assuming exact match for category
   }
-
 
   // Handling 'price' with range if both min and max are provided
   if (priceMin || priceMax) {
@@ -125,11 +125,12 @@ const Search = async (req, res) => {
     const products = await Product.find(query);
     res.json(products);
   } catch (error) {
-    res.status(500).json({ message: 'Error searching products' });
+    res.status(500).json({ message: 'Error searching products', error: error.message });
   }
 };
 
-export { Search }
+export { Search };
+
 const broductDetail = async (req, res) => {
   const productId = req.params.id;
   const product = await Product.findById(productId);

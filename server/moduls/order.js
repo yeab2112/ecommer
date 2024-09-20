@@ -8,10 +8,15 @@ const orderSchema = new mongoose.Schema({
   state: { type: String },
   zip: { type: String },
   totalPrice: { type: String },
+  totalItem:{type:String},
   paymentMethod: { type: String },
-  user: {
-    type: String
-  },
+
+      // ... other fields
+      userId: {
+          type: mongoose.Schema.Types.ObjectId, 
+          ref: 'user' // Assuming you have a 'User' model
+      } , 
+
   products: { type: Array },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
