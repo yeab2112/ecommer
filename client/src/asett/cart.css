@@ -1,5 +1,6 @@
 .cart-container{
     margin: 10px;
+    height: 100vh;
 }
 .product-detail-cart {
     display: flex;

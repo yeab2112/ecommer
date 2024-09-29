@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import '../asett/productdetail.css';
-
 import { cartcontext } from '../component/contextprovide.js';
-
+import { Row, Col,  Image } from 'react-bootstrap'; 
+import '../asett/productdetail.css';
 function ProductDetail() {
   const { productId } = useParams(); 
   const { dispatch } = useContext(cartcontext); 
@@ -33,36 +32,34 @@ function ProductDetail() {
   }, [productId]);
 
   const handleAddToCart = async () => {
-  
-
       dispatch({ type: 'add', product});
-
-     
-    
   };
-
   if (isLoading) return <p>Loading product details...</p>;
   if (error) return <p>Error: {error.message}</p>;
   if (!product) return <p>No product found.</p>;
 
   return (
-    <div className="product-detail">
-      <div className='left-item'>
-        <h2 className="product-detail-name">{product.name}</h2>
-        <img src={product.image} alt={product.name} className="product-detail-image" />
-      </div>
-      <div className='right'>
-        <p className="product-detail-price">Price: ${product.price}</p>
-        <p className="product-detail-brand">Brand: {product.brand}</p>
-        <p className="product-detail-description">Description: {product.description}</p>
+    <div className="product-detail-continer"> 
+      <Row className="justify-content-center"> 
+        <Col md={6} className="text-center"> 
+          <div className='left-item'>
+            <h2 className="product-detail-name">{product.name}</h2>
+            <Image src={product.image} alt={product.name} fluid className="mb-3" style={{ maxWidth: '100%' }} /> 
+          </div>
+        </Col>
+        <Col md={6} className="text-center"> 
+          <div className='right'>
+            <p className="product-detail-price">Price: ${product.price}</p>
+            <p className="product-detail-brand">Brand: {product.brand}</p>
+            <p className="product-detail-description">Description: {product.descrption}</p>
 
-       
-
-        <button className='btn' onClick={handleAddToCart}>Add to Cart</button>
-        <Link to="/shop">
-          <button className='btn'>Back to Shop</button>
-          </Link>
-      </div>
+            <button className='btn btn-primary' onClick={handleAddToCart}>Add to Cart</button>
+            <Link to="/shop">
+              <button className='btn btn-primary'>Back to Shop</button>
+            </Link>
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 }
