@@ -2,14 +2,14 @@ import '../asett/form.css'
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../App'; // Assuming your context is named AuthContext
+import { AuthContext } from '../App'; 
 import { Auth } from '../App';
 function Login({}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('user');
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext); // Access context
+  const { setUser } = useContext(AuthContext); 
    const {setRole} =useContext(Auth)
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,10 +51,10 @@ function Login({}) {
       }
     } catch (error) {
       console.error('Login error:', error);
-      // toast.error('An error occurred during login', {
-      //   position: 'top-right',
-      //   autoClose: 5000,
-      // });
+      toast.error('An error occurred during login', {
+        position: 'top-right',
+        autoClose: 5000,
+      });
     }
   };
 
