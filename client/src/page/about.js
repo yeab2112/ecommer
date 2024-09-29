@@ -1,10 +1,11 @@
 import React from 'react';
+import '../asett/about.css';
+
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import download from '../image/images.png'
 function About() {
   return (
-    <div className=''>
-      <Container className="py-5 px-5"> 
+    <div className='cart-container'>
         <h1 className="text-center mt-4">About Us</h1>
         <Row>
           <Col md={6} className="mb-4"> 
@@ -96,7 +97,7 @@ function About() {
           Thank you for choosing AddisZemmen Store. We look forward to serving
           you!
         </h4>
-      </Container>
+      
     </div>
   );
 }

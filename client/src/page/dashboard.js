@@ -1,8 +1,6 @@
 import React from "react";
 import  '../asett/dashboard.css'
-import Sidebare from "../component/sidebare";
 import { Outlet } from "react-router-dom";
-import Contactget from "./contactget";
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../App";
 import { useContext } from "react";

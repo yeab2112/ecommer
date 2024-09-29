@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { AuthContext } from '../App'; // Assuming your context is named AuthContext
+import { AuthContext } from '../App'; 
 import { useNavigate } from 'react-router-dom';
 
 function Logout() {

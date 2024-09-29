@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import '../asett/productdetail.css'; // Ensure the path is correct
+import '../asett/productdetail.css';
 
 import { cartcontext } from '../component/contextprovide.js';
 
 function ProductDetail() {
-  const { productId } = useParams(); // Get the productId from URL parameters
-  const { dispatch } = useContext(cartcontext); // Get dispatch from context
+  const { productId } = useParams(); 
+  const { dispatch } = useContext(cartcontext); 
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,7 +35,6 @@ function ProductDetail() {
   const handleAddToCart = async () => {
   
 
-      // Dispatch action to update cart context
       dispatch({ type: 'add', product});
 
      

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { cartcontext } from '../component/contextprovide.js';
-import '../asett/productdetail.css';
+import '../asett/cart.css';
 import { AuthContext } from '../App.js';
 import { Link } from 'react-router-dom';
+import { Row, Col, Card, ListGroup } from 'react-bootstrap'; 
 
 function Cart() {
   const { cart, dispatch } = useContext(cartcontext);
@@ -58,42 +59,62 @@ function Cart() {
 
   return (
     <div className="cart-container">
-      <h2>Your Cart</h2>
-      {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <div className='product-detail-cart'>
-          {cart.map(product => (
-            <div key={product._id} className='product-detail-cart'>
-              <img src={product.image} alt={product.name} className="image" />
-              <div>
-                <h2 className="name">{product.name}</h2>
-                <p className="price">Price: ${product.price}</p>
-                <button className='remove-button' 
-                  onClick={() => dispatch({ type: "Remove", _id: product._id })}>
-                  Remove
-                </button>
-              </div>
-              <div className='quantity-controls'>
-                <button className='quantity-button' 
-                  onClick={() => decrease(product._id)}>-</button>
-                <span>{product.quantity}</span>
-                <button className='quantity-button'
-                  onClick={() => increase(product._id)}>+</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      <div className='total-cart'>
-        <h4>Total Items: {totalItems()}</h4> 
-        <h4>Total Price: ${totalPrice().toFixed(2)}</h4>
-        <Link to="/checkouts">
-          <button className='remove-button'
-          onClick={handleCheckout} >Check Out</button>
-        </Link>
-      
-      </div>
+        <h2>Your Cart</h2>
+        {cart.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          <>
+            <Row>
+              <Col md={8}>
+                <ListGroup variant="flush">
+                  {cart.map(product => (
+                    <ListGroup.Item key={product._id} className='d-flex justify-content-between align-items-center'>
+                      <div className='d-flex align-items-center'>
+                        <img src={product.image} alt={product.name} className="image" style={{ width: '50px', height: '50px' }} />
+                        <div className='ms-3'>
+                        <h6 className="name">{product.name}</h6>
+                          <p className="price">Price: ${product.price}</p>
+                        </div>
+                      </div>
+                      <div className='quantity-controls'>
+                        <button className='quantity-button'
+                          onClick={() => decrease(product._id)}>-</button>
+                        <span>{product.quantity}</span>
+                        <button className='quantity-button'
+                          onClick={() => increase(product._id)}>+</button>
+                        <button className='remove-button'
+                          onClick={() => dispatch({ type: "Remove", _id: product._id })}>
+                          Remove
+                        </button>
+                      </div>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </Col>
+              <Col md={4}>
+                <Card>
+                  <Card.Body>
+                    <Card.Title>Cart Summary</Card.Title>
+                    <ListGroup variant="flush">
+                      <ListGroup.Item>
+                        Total Items: {totalItems()}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        Total Price: ${totalPrice().toFixed(2)}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <Link to="/checkouts">
+                          <button className=' btn-primary'
+                            onClick={handleCheckout} >Check Out</button>
+                        </Link>
+                      </ListGroup.Item>
+                    </ListGroup>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </>
+        )}
     </div>
   );
 }

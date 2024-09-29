@@ -39,11 +39,11 @@
     margin: 30px 0;
   }
   .btn{
-    margin: 20px;
+    margin: 10px;
     border-radius: 5px;
     box-shadow: inset;
-    width: 100px;
-    height: 20px;
+    width: 150px;
+    height: 30px;
     background-color: rgb(149, 142, 243);
     border: 2px rgb(7, 7, 7) solid;
   }
@@ -60,46 +60,10 @@
   .quantity-controls{
   display: flex;
   }
-  .quantity-button{
-  width: 30px;
-  height: 20px;
-  margin: 20px;
-  background-color: rgb(44, 102, 211);
-  border: 2px #e2dada solid;
-  border-radius: 5px;}
-  .product-detail-cart {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap:wrap;
-    height:30vh
-
-  }
-  .remove-button{
-    margin-top: 5px;
-    border-radius: 5px;
-    box-shadow: inset;
-    width: 100px;
-    height: 20px;
-    background-color: #cc5b3f;
-    border: 2px rgb(92, 81, 81) solid;
-  }
-  .total-cart{
-    margin-left: 90%;
-    margin-bottom:  50%;
-  }
-  .btn-chek{
-    margin-top: 5px;
-    border-radius: 5px;
-    box-shadow: inset;
-    width: 100px;
-    height: 20px;
-    background-color: hwb(0 25% 20%);
-    border: 2px rgb(92, 81, 81) solid;
-  }
-  /* cattatm */
-  .quantity-selector input {
-    width: 50px;
-    margin-left: 10px;
-  }
+ 
+ 
   
+ 
+  
+  
+ 
