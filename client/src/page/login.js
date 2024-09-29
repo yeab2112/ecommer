@@ -30,14 +30,9 @@ function Login({}) {
         const token = data.token;
         const user = data.userA;
         const role= data.role
-         // Assuming user data is in 'userA'
         localStorage.setItem('token', token);
-
-        // Update the user in the        // Update the user in the context
- 
-        setRole(role)
+      setRole(role)
         setUser(user); 
-        // Redirect to appropriate dashboard based on user type
         if (userType === 'admin') {
           navigate('/admin');
           setRole("admin")
@@ -109,6 +104,11 @@ function Login({}) {
           Login
         </button>
         <p>
+        <Link to="/forget-password" className="log">
+            Forget password
+          </Link>
+          </p>
+          <p>
           I have'nt an account?
           <Link to="/signup" className="log">
             Signup

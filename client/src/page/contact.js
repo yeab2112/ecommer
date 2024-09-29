@@ -6,7 +6,6 @@ const [name, setName] = useState('');
 const [phone, setphone] = useState('');
 const [email, setEmail] = useState('');
 const [message, setMessage] = useState('');
-// const [sent, setSent] = useState(false);
 
 const handleSubmit = async (event) => {
   event.preventDefault();

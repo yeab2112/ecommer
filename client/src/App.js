@@ -19,11 +19,12 @@ import  AdminOrderSummary from './page/orderSummry.js'
 import axios from 'axios';
 import ProductDetails from './page/productdetial.js'
 import Contactget from './page/contactget.js';
-import CheckoutForm from './page/shipping.js'
 import Checkouts from './page/ckackouts.js';
 import Payment from './page/Payment.js';
 import Order from './page/order.js';
 import Shipping from './page/shipping.js';
+import Forgetpassword from './page/forgetpassword.js';
+import ResetPassword from './page/reset.js';
 export const AuthContext = createContext(null)
 export const proq =createContext()
 export const Auth = createContext(null)
@@ -89,7 +90,8 @@ const[quantity,setQuantity]=useState()
           <Route path="/order" element={<Order />} />
           <Route path="/payment" element={<Payment />} />
           <Route path='/shiping' element={<Shipping/>}/>
-          
+          <Route path='/forget-password' element={<Forgetpassword/>}/>
+          <Route path="/reset-password/:token" element={ResetPassword} />
 
             </Routes>
             <Footer />

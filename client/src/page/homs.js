@@ -7,9 +7,7 @@ function Homes() {
    
    
     <div className="homepage-container">
-      {/* Your e-commerce content here */}
       <h1>Welcome to Our Shop</h1>
-      {/* ... other elements ... */}
     </div>
 
 

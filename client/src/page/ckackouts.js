@@ -45,7 +45,7 @@ const Checkouts = () => {
       if (response.data.message) {
         alert(response.data.message);
       } else {
-        alert('Order created successfully!'); // Or provide a default message
+        alert('Order created successfully!');
       }
     } catch (error) {
       console.error(error);
