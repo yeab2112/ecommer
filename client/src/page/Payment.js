@@ -1,42 +1,36 @@
 import React from 'react';
-import '../asett/form.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is imported
+ import '../asett/payment.css';
 
 const Payment = ({ paymentMethod, setPaymentMethod }) => {
- 
-
-  // Function to get cart items from local storage
- 
-
-  // Calculate total price when component mounts
-  
-
   return (
-    <div>
-      <h2 className='peyment-method'>Payment Method</h2>
-      <div className='form-groupp'>
-        <label className='form-label'>Stripe</label>
-        <input
-          type="radio"
-          name="paymentMethod"
-          onChange={(e) => setPaymentMethod(e.target.value)}
-          required
-          value={'Stripe'}
-          className='form-controlp'
-        />
-      </div>
-      <div className='form-groupp'>
-        <label className='form-label'>PayPal</label>
-        <input
-          type="radio"
-          name="paymentMethod"
-          onChange={(e) => setPaymentMethod(e.target.value)}
-          required
-          value={'PayPal'}
-          className='form-controlp'
-        />
-      </div>
+    <div className="payment-continer">
+      <h2 className="text-center m-4">Payment Method</h2>
       
-
+      <div className="d-flex  flex-column justify-content-center align-items-center">
+        <div className=' input ms-4'>
+          <input
+          className='m-2'
+            type="radio"
+            name="paymentMethod"
+            onChange={(e) => setPaymentMethod(e.target.value)}
+            required
+            value={'Stripe'}
+          />
+          <label className='m-2' >Stripe</label>
+        </div>
+        <div className="input ms-4"> {/* Add margin start for spacing */}
+          <input
+          className='m-2'
+            type="radio"
+            name="paymentMethod"
+            onChange={(e) => setPaymentMethod(e.target.value)}
+            required
+            value={'PayPal'}
+          />
+          <label className='m-2' >PayPal</label>
+        </div>
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import download from '../image/images.png'
 function About() {
   return (
-    <div className='cart-container'>
+    <div className='about-container'>
         <h1 className="text-center mt-4">About Us</h1>
         <Row>
           <Col md={6} className="mb-4"> 
