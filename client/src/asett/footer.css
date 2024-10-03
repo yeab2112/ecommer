@@ -3,10 +3,7 @@
     padding: 12px;
     background-color:rgb(44, 48, 44);
     color: white;
-    position:relative;
-    position: 0;
-    padding-inline: 45px;}
-
+}
   .social-links {
 display: flex;   
  padding: 0;

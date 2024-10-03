@@ -7,7 +7,7 @@ import Nav from './component/nav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from "react-toastify"
 import Contact from './page/contact';
-import Footer from './page/footer';
+import Footer from './component/footer.js';
 import Shop from './page/shop';
 import Cart from './page/cart';
 import Logout from './page/logout';

@@ -39,7 +39,7 @@ function Register() {
     }
     return (
         <div className='form-continer'>
-            <form className='form' onSubmit={Submithandler}>
+            <form className='formm' onSubmit={Submithandler}>
                 <h2> create account</h2>
 
                 <div className='form-grop'>

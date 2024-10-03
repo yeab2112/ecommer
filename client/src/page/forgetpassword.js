@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import '../asett/form.css';
@@ -32,7 +32,7 @@ function Forgetpassword() {
 
   return (
     <div className="form-continer">
-      <form onSubmit={handleSubmit} className="form">
+      <form onSubmit={handleSubmit} className="formm">
         <h2>Forget Password</h2>
         <div className="form-group">
           <label htmlFor="email" className="form-label">

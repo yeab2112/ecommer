@@ -19,7 +19,7 @@
     font-size: 1.2rem;
     margin-bottom: 20px;
 } */
- .container {
+ .contact {
     height: 100vh;
     margin: 0;
     background-color:aliceblue;
@@ -32,8 +32,7 @@
     width: 100%;
 }
 
-.form {
-    background-color: blueviolet;
+.formm {
     border-radius: 8px;
     box-shadow: 0 0 10px rgb(43, 33, 33);
     padding: 20px;

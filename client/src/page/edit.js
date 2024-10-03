@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../asett/contact.css'
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 function EditProduct() {
   const { productId } = useParams(); 
@@ -13,10 +13,9 @@ function EditProduct() {
     const fetchProduct = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/product/" + productId
-          , {
-            method: 'GET'
-          });
+        const response = await fetch("http://127.0.0.1:5000/api/product/" + productId, {
+          method: 'GET'
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch product'); 
         }
@@ -36,8 +35,7 @@ function EditProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/product/" + productId
-        , {
+      const response = await fetch("http://127.0.0.1:5000/api/product/" + productId, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -45,10 +43,10 @@ function EditProduct() {
         body: JSON.stringify({
           name: product.name,
           image: product.image,
-          price:product.price,
-          descrption:product.descrption,
-          brand:product.brand,
-          category:product.category,
+          price: product.price,
+          descrption: product.descrption,
+          brand: product.brand,
+          category: product.category,
         }),
       });
 
@@ -76,69 +74,88 @@ function EditProduct() {
   }
 
   return (
-    <div className='container'>
-      <h2>Edit Product</h2>
-        <form  onSubmit={handleSubmit} className='form'>
-           <div className='form-group'>
-          <label htmlFor="name" className='form-label'>Name:</label>
-          <input className='form-control'
+    <div className="container d-flex justify-content-center align-items-center h-100">
+      <form onSubmit={handleSubmit} className="w-50"> {/* Adjust width as necessary */}
+        <h2>Edit Product</h2>
+        
+        <div className="m-3">
+          <label htmlFor="name" className="form-label">Product Name</label>
+          <input
             type="text"
+            className="form-control"
             id="name"
             name="name"
-             value={product.name}
+            value={product.name}
             onChange={handleChange}
+            required
           />
         </div>
-        <div>
-          <label htmlFor="price" className='form-label'>Price:</label>
-          <input className='form-control'
-            type="number"
-            id="price"
-            name="price"
-             value={product.price}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="image" className='form-label'>Image URL:</label>
-          <input className='form-control'
+
+        <div className="m-3">
+          <label htmlFor="image" className="form-label">Image URL</label>
+          <input
             type="text"
+            className="form-control"
             id="image"
             name="image"
             value={product.image}
             onChange={handleChange}
+            required
           />
         </div>
-        <div>
-          <label htmlFor="brand" className='form-label'>Brand:</label>
-          <input className='form-control'
-            type="text"
-            id="brand"
-            name="brand"
-            value={product.brand}
+
+        <div className="m-3">
+          <label htmlFor="price" className="form-label">Price</label>
+          <input
+            type="number"
+            className="form-control"
+            id="price"
+            name="price"
+            value={product.price}
             onChange={handleChange}
+            required
           />
-        </div><div>
-          <label htmlFor="descrption" className='form-label'>Descrption:</label>
-          <input className='form-control'
-            type="text"
+        </div>
+
+        <div className="m-3">
+          <label htmlFor="descrption" className="form-label">Description</label>
+          <textarea
+            className="form-control"
             id="descrption"
             name="descrption"
             value={product.descrption}
             onChange={handleChange}
+            required
+          ></textarea>
+        </div>
+
+        <div className="m-3">
+          <label htmlFor="brand" className="form-label">Brand</label>
+          <input
+            type="text"
+            className="form-control"
+            id="brand"
+            name="brand"
+            value={product.brand}
+            onChange={handleChange}
+            required
           />
         </div>
-        <div>
-          <label htmlFor="category" className='form-label'>Category:</label>
-          <input className='form-control'
+
+        <div className="m-3">
+          <label htmlFor="category" className="form-label">Category</label>
+          <input
             type="text"
+            className="form-control"
             id="category"
             name="category"
             value={product.category}
             onChange={handleChange}
+            required
           />
         </div>
-        <button type="submit" className='form-button'>Update</button>
+
+        <button type="submit" className="btn btn-primary align-items-center" >Update Product</button>
       </form>
     </div>
   );

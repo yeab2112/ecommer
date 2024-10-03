@@ -11,15 +11,12 @@
 /* } */
 .homepage-container {
   background-image: url('/home/yeab/myproject/client/src/image/ image.png');
-  /* Direct path from 'public' */
-  /* HomePage.css */
+ 
   background-size: cover;
-  /* Make the image cover the entire container */
+  
   background-repeat: no-repeat;
-  /* Prevent the image from repeating */
   min-height: 100vh;
   width: 100%;
-  /* Ensure the background extends to the full viewport height */
   justify-content: center;
 
 }

@@ -60,7 +60,7 @@ function Login({}) {
 
   return (
     <div className="form-continer">
-      <form onSubmit={handleSubmit} className="form">
+      <form onSubmit={handleSubmit} className="formm">
         <h2>Login</h2>
         <div className="form-group">
           <label htmlFor="email" className="form-label">

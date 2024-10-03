@@ -33,7 +33,7 @@ console.log( phone, name, email, message )
 }
 } catch (error) {console.error('Error:', error);}};
 return (
-<div className="container">
+<div className="contact">
 <form onSubmit={handleSubmit} className="form">
 <h2>Contact Me</h2>
 <div className='form-group'>
