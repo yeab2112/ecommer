@@ -1,13 +1,13 @@
 import { Order } from "../moduls/order.js";
 const Shipping = async (req, res) => {
   try {
-    const { address, address2, state, city, zip, userId, products,totalItem, totalPrice, paymentMethod } = req.body;
+    const { address, address2, state, city, zip, userId, products,totalItem, totalPrice } = req.body;
 
-    if (!address || !address2 || !state || !city ||!totalItem|| !zip || !userId|| !products || !totalPrice|| !paymentMethod) {
+    if (!address || !address2 || !state || !city ||!totalItem|| !zip || !userId|| !products || !totalPrice) {
       return res.status(400).json({ error: 'Missing required fields' })
     };
 
-    const newOrder = new Order({ address, totalItem, address2, city, state, zip, userId, products, totalPrice, paymentMethod });
+    const newOrder = new Order({ address, totalItem, address2, city, state, zip, userId, products, totalPrice});
 
     await newOrder.save();
 

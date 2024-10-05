@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@paypal/checkout-server-sdk": "^1.0.3",
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -22,6 +23,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.1",
     "mongose": "^0.0.2-security",
+    "nodemailer": "^6.9.15",
     "paypal-rest-sdk": "^1.8.1",
     "stripe": "^16.8.0"
   }

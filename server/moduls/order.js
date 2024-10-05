@@ -9,7 +9,6 @@ const orderSchema = new mongoose.Schema({
   zip: { type: String },
   totalPrice: { type: String },
   totalItem:{type:String},
-  paymentMethod: { type: String },
 
       // ... other fields
       userId: {

@@ -1,5 +1,5 @@
 import express from "express"
-import { Register } from "../controller/user.js"
+import { Forgetpassword, Register, Reset } from "../controller/user.js"
 import {body} from "express-validator"
 import { Contacts, Contactt } from "../controller/contact.js"
 import { Products } from "../controller/product.js"
@@ -14,9 +14,8 @@ import { Search } from "../controller/product.js"
 import {broductDetail} from "../controller/product.js"
 import { Shipping } from "../controller/shipping.js"
 import { Carts } from "../controller/cart.js"
-import { Payment } from "../controller/payment.js"
-import { OrderPlace } from "../controller/orderplace.js"
 import { OrderSummry } from "../controller/orderSummry.js"
+import { initiatePayment, verifyPayment } from "../controller/paymentController.js";
 const router=express.Router()
 
  router.post('/register',[
@@ -44,13 +43,16 @@ router.get('/contact', Contactt);
 router.get('/search', Search);  
 router.get('/productdetail/:id',broductDetail);
 router.post('/cart',Carts)
-router.post('/payment',Payment)
-router.post('/OrderPlace',OrderPlace)
 router.post('/shipping',Shipping)
 
 router.get('/orderSummry',OrderSummry)
+router.post('/forget-password',Forgetpassword)
+router.post('/reset-password/:token',Reset)
+// Route to initiate payment
+router.post('/initiate', initiatePayment);
 
-  // Authenticati,on middleware
+// Route to verify payment
+router.post('/verify', verifyPayment);  
  
 
 export{ router}

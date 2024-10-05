@@ -13,6 +13,8 @@ const UserS = new mongoose.Schema({
         type: String,
         require: true
     },
+    resetToken: String,
+  resetTokenExpiration: Date,
 });
 
 const UserM = mongoose.model('user', UserS);
