@@ -25,11 +25,7 @@ function Progressbar() {
             <span>Payment</span>
           </Link>
         </div>
-        <div className={`progress-step ${currentStep >= 3 ? 'active' : '3'}`}>
-          <Link to="/order" onClick={() => handleStepChange(3)}>
-            <span>Order Place</span>
-          </Link>
-        </div>
+        
       </div>
        </div>
     </>

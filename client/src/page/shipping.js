@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-const CheckoutForm = ({
+const Shipping = ({
     address,
     setAddress,
     address2,
@@ -11,7 +11,7 @@ const CheckoutForm = ({
     state,
     setState,
     city,
-    setCtiy
+    setCity
 }) => {
     return (
         <div className='m-4'>
@@ -47,7 +47,7 @@ const CheckoutForm = ({
                                 <input 
                                     type="text"
                                     name="city"
-                                    onChange={(e) => setCtiy(e.target.value)}
+                                    onChange={(e) => setCity(e.target.value)}
                                     required
                                     className='form-control'
                                 />
@@ -85,4 +85,4 @@ const CheckoutForm = ({
     );
 };
 
-export default CheckoutForm;
+export default Shipping;
