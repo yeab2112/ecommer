@@ -20,7 +20,6 @@ import axios from 'axios';
 import ProductDetails from './page/productdetial.js'
 import Contactget from './page/contactget.js';
 import Checkouts from './page/ckackouts.js';
-import Order from './page/order.js';
 import Shipping from './page/shipping.js';
 import Forgetpassword from './page/forgetpassword.js';
 import ResetPassword from './page/reset.js';
@@ -87,7 +86,6 @@ const[quantity,setQuantity]=useState()
               <Route path="/products/edit/:productId" element={<EditProduct />} />
               <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path="/checkouts" element={<Checkouts />} /> 
-          <Route path="/order" element={<Order />} />
           <Route path="/payment" element={<PaymentForm />} />
           <Route path='/shiping' element={<Shipping/>}/>
           <Route path='/forget-password' element={<Forgetpassword/>}/>

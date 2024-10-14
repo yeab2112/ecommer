@@ -1,7 +1,7 @@
 import React from 'react';
 import '../asett/about.css';
 
-import { Container, Row, Col, ListGroup } from 'react-bootstrap';
+import { Row, Col, ListGroup } from 'react-bootstrap';
 import download from '../image/images.png'
 function About() {
   return (

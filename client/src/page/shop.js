@@ -6,26 +6,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Shop() {
   const [products, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1); 
-  const recordsPerPage = 3; 
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 3;
   const [searchTerm, setSearchTerm] = useState('');
-  const [filters, setFilters] = useState({
-    category: '',
-  });
+  const [filters, setFilters] = useState({ category: '' });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const { role } = useContext(Auth);
 
+  // Handles search input change
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  // Fetch products from the backend
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/search?searchText=${searchTerm}&category=${filters.category ?? ''}`);
+        const response = await fetch(
+          `http://127.0.0.1:5000/api/search?searchText=${searchTerm}&category=${filters.category}`
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
@@ -33,7 +35,7 @@ function Shop() {
         setProducts(data);
         setError(null);
       } catch (error) {
-        setError(error);
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -42,15 +44,14 @@ function Shop() {
     fetchProducts();
   }, [searchTerm, filters]);
 
+  // Handle deleting a product (Admin role)
   const handleDeleteProduct = async (productId) => {
     try {
       const response = await fetch(`http://127.0.0.1:5000/api/product/${productId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
       });
-
       if (response.ok) {
         setProducts((prevProducts) => prevProducts.filter((product) => product._id !== productId));
-        console.log('Product deleted successfully!');
       } else {
         console.error('Error deleting product:', response.statusText);
       }
@@ -70,63 +71,72 @@ function Shop() {
   };
 
   return (
-    <div className="container">   
-       <div className="justify-content-center text-aligns-center d-flex ">
-        <select className="form-select w-50 m-5" aria-label="Filter" onChange={(e) => setFilters({ ...filters, category: e.target.value })}>
+    <div className="container">
+      {/* Search and Filter Section */}
+      <div className="justify-content-center text-align-center d-flex">
+        <select
+          className="form-select w-50 m-5"
+          aria-label="Filter"
+          onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+        >
           <option value=''>ALL CATEGORIES</option>
           <option value='electronics'>Electronics</option>
           <option value='clothing'>Clothing</option>
           <option value='home-appliances'>Home Appliances</option>
           <option value='furniture'>Furniture</option>
         </select>
-          <input 
-            type="text" 
-            className="form-control w-50 m-5" 
-            placeholder="Search products..." 
-            onChange={handleSearchChange}
-            aria-label="Search"
-          />
+        <input
+          type="text"
+          className="form-control w-50 m-5"
+          placeholder="Search products..."
+          onChange={handleSearchChange}
+          aria-label="Search"
+        />
       </div>
+
       <h2>Product List</h2>
 
       {isLoading && <p>Loading products...</p>}
-      {error && <p>Error: {error.message}</p>}
+      {error && <p>Error: {error}</p>}
 
-      <div className='product'>
-        <ul className='list-unstyled'> 
-          {products.length > 0 ? (
-            currentRecords.map((product) => (
-              <li key={product._id} className='product-card'>
-                <Link to={`/product/${product._id}`}>
-                  <img src={product.image} alt={product.name} className="product-image" />
-                </Link>
+      {/* Product List */}
+      <div className="row">
+  {currentRecords.length > 0 ? (
+    currentRecords.map((product) => (
+      <div key={product._id} className="col-md-4 mb-4">
+        <div className="product-card card">
+          <Link to={`/product/${product._id}`}>
+            <img src={product.image} alt={product.name} className="product-image card-img-top" />
+          </Link>
 
-                <div className="product-info">
-                  <h3 className="product-name">{product.name}</h3>
-                  <p className="product-price">${product.price}</p>
-                </div>
-                {role === 'admin' && (
-                  <div className="buttons">
-                    <Link to={`/products/edit/${product._id}`}>
-                      <button>Update</button>
-                    </Link>
-                    <button onClick={() => handleDeleteProduct(product._id)}>Delete</button>
-                  </div>
-                )}
-              </li>
-            ))
-          ) : (
-            <p>No products found.</p>
+          <div className="product-info card-body">
+            <h3 className="product-name card-title">{product.name}</h3>
+            <p className="product-price card-text">${product.price}</p>
+          </div>
+
+          {role === 'admin' && (
+            <div className="buttons">
+              <Link to={`/products/edit/${product._id}`}>
+                <button className="btn btn-primary">Update</button>
+              </Link>
+              <button className="btn btn-danger" onClick={() => handleDeleteProduct(product._id)}>Delete</button>
+            </div>
           )}
-        </ul>
+        </div>
       </div>
+    ))
+  ) : (
+    <p>No products found.</p>
+  )}
+</div>
 
+
+      {/* Pagination */}
       <nav aria-label="Page navigation example">
         <ul className="pagination justify-content-center">
-          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}> 
+          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
             <Link className="page-link" to="#" onClick={() => handlePageChange(currentPage - 1)} aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
-              <span className="sr-only">Previous</span>
             </Link>
           </li>
           {Array.from({ length: totalPages }, (_, index) => (
@@ -139,7 +149,6 @@ function Shop() {
           <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
             <Link className="page-link" to="#" onClick={() => handlePageChange(currentPage + 1)} aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
-              <span className="sr-only">Next</span>
             </Link>
           </li>
         </ul>

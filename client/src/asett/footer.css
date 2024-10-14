@@ -3,6 +3,7 @@
     padding: 12px;
     background-color:rgb(44, 48, 44);
     color: white;
+    margin: 0px;
 }
   .social-links {
 display: flex;   
