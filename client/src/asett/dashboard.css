@@ -1,24 +1,20 @@
-.sidebar .nav {
-  grid-template-columns: repeat(2, 1fr); /* Two columns */
-  gap: 10px; /* Space between items */
+.sidebar {
+  background-color: hsl(211, 100%, 50%); /* Bootstrap primary color */
+  min-height: 100%; /* Full height */
 }
-  
-  .sidebar {
-    color: white;
-    height: 100vh;
-}
-  
-  
 
-  
-  .sidebar a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .sidebar a:hover {
-    background-color: hsl(0, 19%, 91%);
-  }
-  
-  
-  
+.sidebar .nav-link {
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.sidebar .nav-link:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.sidebar .nav-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Add divider between items */
+}
+
+.sidebar h5 {
+  margin-bottom: 20px; /* Add space below headings if needed */
+}

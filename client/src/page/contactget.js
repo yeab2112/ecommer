@@ -21,7 +21,7 @@ function Contactget() {
   }, []);
 
   return (
-    <div className="container mt-2">
+    <div className="container mt-2 vh-100">
       <h1 className="text-center mb-4">Contact List</h1>
 
       {/* Contact Table */}
