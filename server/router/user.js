@@ -14,7 +14,7 @@ import { Search } from "../controller/product.js"
 import {broductDetail} from "../controller/product.js"
 import { Shipping } from "../controller/shipping.js"
 import { Carts } from "../controller/cart.js"
-import { OrderSummry } from "../controller/orderSummry.js"
+import { OrderSummary,Delete } from "../controller/orderSummry.js"
 import { initiatePayment, verifyPayment } from "../controller/paymentController.js";
 const router=express.Router()
 
@@ -45,7 +45,11 @@ router.get('/productdetail/:id',broductDetail);
 router.post('/cart',Carts)
 router.post('/shipping',Shipping)
 
-router.get('/orderSummry',OrderSummry)
+router.get('/orderSummry',OrderSummary)
+
+
+router.delete('/orders/:id', Delete);
+
 router.post('/forget-password',Forgetpassword)
 router.post('/reset-password/:token',Reset)
 // Route to initiate payment

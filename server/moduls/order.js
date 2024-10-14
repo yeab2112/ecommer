@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
@@ -8,21 +7,21 @@ const orderSchema = new mongoose.Schema({
   state: { type: String },
   zip: { type: String },
   totalPrice: { type: String },
-  totalItem:{type:String},
+  totalItem: { type: String },
 
-      // ... other fields
-      userId: {
-          type: mongoose.Schema.Types.ObjectId, 
-          ref: 'user' // Assuming you have a 'User' model
-      } , 
-
-  products: { type: Array },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'user' // Ensure this matches your User model name
+  }, 
+  products: [{ // Changed to an array of ObjectIds
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'product' // Ensure this matches your Product model name
+  }],
+  
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
 
 const Order = mongoose.model('Order', orderSchema);
-
-
 
 export { Order };

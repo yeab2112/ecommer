@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { router } from './route/user.js';
+import { router } from './router/user.js';
 import './config/db.js';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';

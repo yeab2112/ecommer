@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
     });
    
-    const Product = mongoose.model('products', productSchema);
+    const Product = mongoose.model('product', productSchema);
    
 
  export {Product}
