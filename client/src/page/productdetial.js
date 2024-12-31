@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { cartcontext } from '../component/contextprovide.js';
 import { Row, Col,  Image } from 'react-bootstrap'; 
-import '../asett/productdetail.css';
+import '../asset/productdetail.css';
 function ProductDetail() {
   const { productId } = useParams(); 
   const { dispatch } = useContext(cartcontext); 

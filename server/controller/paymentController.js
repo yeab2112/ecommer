@@ -16,7 +16,7 @@ const initiatePayment = async (req, res) => {
     first_name: firstName,
     last_name: lastName,
     tx_ref: txRef,
-    return_url:"http://localhost:3000",
+    return_url:"http://localhost:3000/paymentSuccess",
     callback_url: callbackUrl,
     customization: {
       title: 'Payment',
@@ -34,7 +34,8 @@ const initiatePayment = async (req, res) => {
     if (response.data.status === 'success') {
       res.status(200).json({
         status: 'success',
-        data: response.data.data, // The payment initialization response
+        data: response.data.data, 
+        // The payment initialization response
       });
     } else {
       res.status(400).json({
@@ -52,35 +53,46 @@ const initiatePayment = async (req, res) => {
 };
 
 // Verify payment after transaction completes
- const verifyPayment = async (req, res) => {
-  const { txRef } = req.body;
 
-  try {
-    const response = await axios.get(`https://api.chapa.co/v1/transaction/verify/${txRef}`, {
-      headers: {
+ const verifyPayment= async (req, res) => {
+   const { txRef } = req.body;
+   console.log (txRef) 
+
+   if (!txRef) {
+     return res.status(400).json({ message: 'tx_ref is required' });
+   }
+   console.log (txRef) 
+
+   try {
+     // Make GET request to Chapa API for payment verification
+     const response = await axios.get(`https://api.chapa.co/v1/transaction/verify/${txRef}`, {
+      headers:{
         Authorization: `Bearer ${CHAPA_SECRET_KEY}`,
       },
-    });
-
-    if (response.data.status === 'success') {
-      // Payment was successful
-      res.status(200).json({
-        status: 'success',
-        data: response.data.data, // Payment verification data
-      });
-    } else {
-      // Payment failed
-      res.status(400).json({
-        status: 'fail',
-        message: 'Payment verification failed',
-      });
-    }
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Verification failed',
-      error: error.message,
-    });
-  }
-};
+     });
+ 
+     // Check if payment verification is successful
+     if (response.data.status === 'success') {
+       res.status(200).json({
+         status: 'success',
+         data: response.data.data, 
+       });
+       console.log(response.data.data)
+     } else {
+       res.status(400).json({
+         status: 'fail',
+         message: 'Payment verification failed',
+       });
+     }
+   } 
+   catch (error) {
+     res.status(500).json({
+       status: 'error',
+       message: 'Server error during payment verification',
+       error: error.message,
+       
+     });
+   }
+ };
+ 
 export {initiatePayment,verifyPayment}

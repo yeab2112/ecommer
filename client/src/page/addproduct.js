@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../asett/addproduct.css';
+import '../asset/addproduct.css';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS

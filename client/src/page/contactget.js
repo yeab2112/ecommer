@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../asett/contactget.css';
+import '../asset/contactget.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Contactget() {

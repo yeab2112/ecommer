@@ -56,7 +56,7 @@ router.post('/reset-password/:token',Reset)
 router.post('/initiate', initiatePayment);
 
 // Route to verify payment
-router.post('/verify', verifyPayment);  
+router.post('/verify/:txRef', verifyPayment);  
  
 
 export{ router}

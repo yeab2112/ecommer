@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import '../asett/contact.css' 
+import '../asset/contact.css' 
 const Contact = () => {
 const [name, setName] = useState('');
 const [phone, setphone] = useState('');

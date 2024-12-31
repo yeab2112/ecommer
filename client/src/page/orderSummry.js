@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaTrash } from 'react-icons/fa';  // Trash icon from react-icons
+import { FaTrash } from 'react-icons/fa'; // Trash icon from react-icons
+import { Link } from 'react-router-dom';
 
 function AdminOrderSummary() {
   const [orderDetails, setOrderDetails] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 2;
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/api/orderSummry')
       .then(res => res.json())
       .then(data => {
         console.log('Fetched Order Data:', data);
-        setOrderDetails(data);
+        // Ensure that data is an array, if not set it to an empty array
+        if (Array.isArray(data)) {
+          setOrderDetails(data);
+        } else {
+          setOrderDetails([]); // Fallback if data is not an array
+        }
       })
-      .catch(error => console.error('Error fetching Orders:', error));
+      .catch(error => {
+        console.error('Error fetching Orders:', error);
+        setOrderDetails([]); // Handle error by setting orderDetails to an empty array
+      });
   }, []);
 
   // Function to handle delete action
@@ -36,13 +47,23 @@ function AdminOrderSummary() {
     }
   };
 
+  // Pagination Logic
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const currentRecords = Array.isArray(orderDetails) ? orderDetails.slice(firstIndex, lastIndex) : [];
+  const totalPages = Math.ceil(orderDetails.length / recordsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="container my-5">
       <h2 className="text-center mb-4">Admin Order Summary</h2>
 
       <div className="row">
-        {orderDetails.length > 0 ? (
-          orderDetails.map((order) => (
+        {currentRecords.length > 0 ? (
+          currentRecords.map((order) => (
             <div key={order._id} className="col-md-12 mb-4">
               <div className="card shadow-sm">
                 <div className="card-body">
@@ -113,6 +134,29 @@ function AdminOrderSummary() {
           <p className="text-center">No orders found.</p>
         )}
       </div>
+
+      {/* Pagination */}
+      <nav aria-label="Page navigation example">
+        <ul className="pagination justify-content-center">
+          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+            <Link className="page-link" to="#" onClick={() => handlePageChange(currentPage - 1)} aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </Link>
+          </li>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <li key={index + 1} className={`page-item ${index + 1 === currentPage ? 'active' : ''}`}>
+              <Link className="page-link" to="#" onClick={() => handlePageChange(index + 1)}>
+                {index + 1}
+              </Link>
+            </li>
+          ))}
+          <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+            <Link className="page-link" to="#" onClick={() => handlePageChange(currentPage + 1)} aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 }

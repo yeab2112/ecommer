@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { cartcontext } from '../component/contextprovide.js';
-import '../asett/cart.css';
+import '../asset/cart.css';
 import { AuthContext } from '../App.js';
 import { Link } from 'react-router-dom';
 import { Row, Col, Card, ListGroup } from 'react-bootstrap'; 
@@ -27,7 +27,6 @@ function Cart() {
           totalPrice: totalPrice,
         });
       }));
-      alert('Checkout successful!');
       dispatch({ type: 'CLEAR_CART' }); 
     } catch (error) {
       console.error('Error during checkout:', error);
@@ -68,8 +67,9 @@ function Cart() {
               <Col md={8}>
                 <ListGroup variant="flush">
                   {cart.map(product => (
-                    <ListGroup.Item key={product._id} className='d-flex justify-content-between align-items-center'>
-                      <div className='d-flex align-items-center'>
+                    <ListGroup.Item key={product._id} className='d-flex justify-content-center 
+                    align-items-center'>
+                      <div className='d-flex align-items-center m-5'>
                         <img src={product.image} alt={product.name} className="image" style={{ width: '50px', height: '50px' }} />
                         <div className='ms-3'>
                         <h6 className="name">{product.name}</h6>
@@ -104,7 +104,7 @@ function Cart() {
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <Link to="/checkouts">
-                          <button className=' btn-primary'
+                          <button className='btn btn-primary'
                             onClick={handleCheckout} >Check Out</button>
                         </Link>
                       </ListGroup.Item>

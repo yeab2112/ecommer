@@ -1,7 +1,7 @@
 import React, {  useState } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import '../asett/form.css';
+import '../asset/form.css';
 
 function Forgetpassword() {
   const navigate = useNavigate();

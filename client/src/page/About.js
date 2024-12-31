@@ -1,5 +1,5 @@
 import React from 'react';
-import '../asett/about.css';
+import '../asset/about.css';
 import { Row, Col, ListGroup } from 'react-bootstrap';
 import download from '../image/images.png';
 

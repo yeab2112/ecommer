@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Auth } from '../App';
-import '../asett/shop.css';
+import '../asset/shop.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Shop() {

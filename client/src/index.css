@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ensure the active class underlines the active link */
+.nav-link.active hr {
+    @apply block border-b-2 border-blue-500;
+  }
+  
+  /* Hide underline for non-active links */z
+  .nav-link hr {
+    @apply hidden;
+  }
+  
