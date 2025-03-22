@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import { ShopContext } from '../context/ShopContext';
 import Title from '../component/Title';
 
 function Collection() {
-  const { products, search, showSearch } = useContext(ShopContext);
+  const { products, search} = useContext(ShopContext);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortOption, setSortOption] = useState('relavent');
-  const [showFilters, setShowFilters] = useState(false); // State to toggle filters
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) =>
@@ -34,15 +35,12 @@ function Collection() {
     <div className="flex flex-col md:flex-row">
       {/* Filters Section */}
       <div className="w-full md:w-1/4 p-4 pb-4 border-r h-72 border-gray-300 mb-6">
-        {/* Toggle Button for Small Screens */}
         <button
           onClick={() => setShowFilters(!showFilters)}
           className="md:hidden bg-blue-500 text-white p-2 rounded-full w-full text-center"
         >
           {showFilters ? "Hide Filters" : "Show Filters"}
         </button>
-
-        {/* Filters Content */}
         <div className={`mt-4 ${showFilters ? "block" : "hidden"} md:block`}>
           <p className="font-bold text-lg mb-2 text-gray-800">Filter</p>
           <div className="mb-6">
@@ -64,9 +62,7 @@ function Collection() {
 
       {/* Products Section */}
       <div className="w-full md:w-3/4 p-4">
-        {/* Filters, Title, and Sort in a Row */}
         <div className="flex flex-wrap items-center justify-between mb-4">
-          {/* Filter Toggle (Small Screens) */}
           <div className="md:hidden flex">
             <button
               onClick={() => setShowFilters(!showFilters)}
@@ -75,13 +71,9 @@ function Collection() {
               {showFilters ? "Hide Filters" : "Show Filters"}
             </button>
           </div>
-
-          {/* Title */}
           <div className="flex-grow flex justify-center">
             <Title title1="All" title2="Collection" />
           </div>
-
-          {/* Sort Dropdown */}
           <div>
             <select
               className="border p-2 rounded shadow-sm text-gray-700 focus:ring focus:ring-blue-300"
@@ -99,7 +91,11 @@ function Collection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div key={product.id} className="border p-4 rounded shadow-sm">
+              <Link
+                key={product.id}
+                to={`/product/${product.id}`} // Navigate to product details by ID
+                className="border p-4 rounded shadow-sm hover:shadow-lg transition-shadow duration-200"
+              >
                 <img
                   src={product.image}
                   alt={product.name}
@@ -108,7 +104,7 @@ function Collection() {
                 <h3 className="font-bold mt-2 text-gray-800">{product.name}</h3>
                 <p className="text-gray-500">{product.category}</p>
                 <p className="font-bold text-blue-600">${product.price}</p>
-              </div>
+              </Link>
             ))
           ) : (
             <p className="text-gray-500">No products found</p>

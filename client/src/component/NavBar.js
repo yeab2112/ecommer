@@ -4,13 +4,15 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { assets } from "../asset/asset.js";
 import { ShopContext } from "../context/ShopContext.js";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   const [visible, setVisible] = useState(false); // For mobile menu
-  const [dropdownVisible, setDropdownVisible] = useState(false); // For profile dropdown
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
-  const { setShowSearch} = useContext(ShopContext);
+
+  // Accessing context values
+  const { setShowSearch, cart } = useContext(ShopContext); // Adding cart to display its length
 
   const handleLogout = () => {
     MySwal.fire({
@@ -43,19 +45,19 @@ function NavBar() {
               onClick={() => setVisible(false)} // Close mobile menu
               className="flex items-center text-gray-700"
             >
-              <img 
-                src={assets.backIcon} 
-                alt="Back" 
-                className="h-6 w-6 mr-2" 
+              <img
+                src={assets.backIcon}
+                alt="Back"
+                className="h-6 w-6 mr-2"
               />
               <span>Back</span>
             </button>
           ) : (
             <NavLink to="/">
-              <img 
-                src={assets.logo} 
-                alt="Logo" 
-                className="h-12 w-auto object-contain" 
+              <img
+                src={assets.logo}
+                alt="Logo"
+                className="h-12 w-auto object-contain"
               />
             </NavLink>
           )}
@@ -124,34 +126,33 @@ function NavBar() {
           />
 
           {/* Profile Dropdown */}
-          <div className="relative">
+          <div className="relative group"> {/* Use group to handle hover */}
             <img
               src={assets.profile}
               alt="Profile Icon"
               className="h-6 w-6 cursor-pointer"
-              onClick={() => setDropdownVisible(!dropdownVisible)} // Toggle dropdown
+              onClick={() => window.location.href = '/login'} // Navigate to login page on click
             />
-            {dropdownVisible && (
-              <div className="absolute right-0 bg-white shadow-lg rounded-lg p-4 mt-2 w-40">
-                <p className="cursor-pointer hover:text-blue-500">My Profile</p>
-                <p className="cursor-pointer hover:text-blue-500">Orders</p>
-                <p
-                  className="cursor-pointer hover:text-blue-500"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </p>
-              </div>
-            )}
+            <div className="absolute right-0 bg-white shadow-lg rounded-lg p-4 mt-2 w-40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+              <p className="cursor-pointer hover:text-blue-500">My Profile</p>
+              <p className="cursor-pointer hover:text-blue-500">Orders</p>
+              <p
+                className="cursor-pointer hover:text-blue-500"
+                onClick={handleLogout}
+              >
+                Logout
+              </p>
+            </div>
           </div>
 
           {/* Cart Icon */}
-          <div className="relative">
+          <Link to="/ccarts" className="relative">
             <img src={assets.cart} alt="Cart Icon" className="h-6 w-6 cursor-pointer" />
+            {/* Dynamic Cart Length */}
             <p className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-              10
+              {cart?.length || 0} {/* Default to 0 if cart is undefined */}
             </p>
-          </div>
+          </Link>
 
           {/* Hamburger Menu for Mobile */}
           <div className="md:hidden relative">

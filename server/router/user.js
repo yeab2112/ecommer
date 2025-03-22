@@ -1,62 +1,71 @@
 import express from "express"
-import { Forgetpassword, Register, Reset } from "../controller/user.js"
-import {body} from "express-validator"
+import { Forgetpassword, Reset } from "../controller/user.js"
 import { Contacts, Contactt } from "../controller/contact.js"
-import { Products } from "../controller/product.js"
-import { getAllProducts } from "../controller/product.js"
-import {deleteProduct} from "../controller/product.js"
-import {updateProduct} from "../controller/product.js"
-import {getProductById} from "../controller/product.js"
-import { Login } from "../controller/user.js"
-import { verifyUser } from "../middleware/autho.js"
+import { UserLogin,UserRegister,AdminLogin } from "../controller/user.js"
 import { Auth } from "../controller/user.js"
-import { Search } from "../controller/product.js"
-import {broductDetail} from "../controller/product.js"
 import { Shipping } from "../controller/shipping.js"
 import { Carts } from "../controller/cart.js"
 import { OrderSummary,Delete } from "../controller/orderSummry.js"
 import { initiatePayment, verifyPayment } from "../controller/paymentController.js";
-const router=express.Router()
+const userRouter=express.Router()
 
- router.post('/register',[
-body("name").trim().notEmpty().withMessage('Name Shouled Not be Empty'),
-body("email").trim().notEmpty().withMessage('Email Shouled Not be Empty')
-.isEmail().withMessage('Envalid Email'),
-body("password").trim().notEmpty().withMessage('Password Shouled Not be Empty')
-.isLength({min:5,max:30}).withMessage('Password shouled be between 5-30')
- ],Register)
+import { body, validationResult } from 'express-validator';
 
-//  contact
+userRouter.post('/register', [
+  // Validate and sanitize name
+  body('name')
+    .trim()
+    .notEmpty().withMessage('Name should not be empty')
+    .isLength({ min: 3 }).withMessage('Name should be at least 3 characters long'),
+
+  // Validate and sanitize email
+  body('email')
+    .trim()
+    .notEmpty().withMessage('Email should not be empty')
+    .isEmail().withMessage('Invalid email address')
+    .normalizeEmail(), // Normalize email to handle case sensitivity
+
+  // Validate and sanitize password
+  body('password')
+    .trim()
+    .notEmpty().withMessage('Password should not be empty')
+    .isLength({ min: 6, max: 30 }).withMessage('Password should be between 6 and 30 characters'),
+
+  // Handle validation errors
+], (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  next();
+}, UserRegister); // Proceed to the UserRegister function if validation passes
 
 
- router.post('/contact',Contacts)
+
+ userRouter.post('/contact',Contacts)
 //  product
 
-router.post('/product', Products) 
-router.get('/product', getAllProducts)
-router.delete('/Product/:id',deleteProduct)
-router.put('/Product/:id', updateProduct);
-router.get('/Product/:id',getProductById);
-router.post('/login', Login)
-router.get('/verify', verifyUser, Auth);  
-router.get('/contact', Contactt);  
-router.get('/search', Search);  
-router.get('/productdetail/:id',broductDetail);
-router.post('/cart',Carts)
-router.post('/shipping',Shipping)
 
-router.get('/orderSummry',OrderSummary)
+userRouter.post('/login', UserLogin)
+userRouter.post('/login', UserRegister)
+userRouter.post('/admin_login', AdminLogin)
+
+userRouter.get('/contact', Contactt);  
+userRouter.post('/cart',Carts)
+userRouter.post('/shipping',Shipping)
+
+userRouter.get('/orderSummry',OrderSummary)
 
 
-router.delete('/orders/:id', Delete);
+userRouter.delete('/orders/:id', Delete);
 
-router.post('/forget-password',Forgetpassword)
-router.post('/reset-password/:token',Reset)
+userRouter.post('/forget-password',Forgetpassword)
+userRouter.post('/reset-password/:token',Reset)
 // Route to initiate payment
-router.post('/initiate', initiatePayment);
+userRouter.post('/initiate', initiatePayment);
 
 // Route to verify payment
-router.post('/verify/:txRef', verifyPayment);  
+userRouter.post('/verify/:txRef', verifyPayment);  
  
 
-export{ router}
+export default userRouter

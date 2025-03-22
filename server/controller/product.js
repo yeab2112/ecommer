@@ -1,37 +1,66 @@
 import { Product } from "../moduls/product.js"
-
-const getAllProducts = async (req, res) => {
+import {v2 as cloudinary} from "cloudinary"
+const ListProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.json(products);
+    res.json( {success:true ,products});
   } catch (error) {
     res.status(500).json({ message: 'Error fetching products' });
   }
 };
 
-export { getAllProducts }
 
-
-const Products = async (req, res) => {
+const AddProducts = async (req, res) => {
   try {
-    const { name, price, image, brand, descrption, category } = req.body;
+    const { name, price, bestSeller, size, description, category } = req.body;
 
-    if (!name || !price || !image) {
-      return res.status(400).json({ error: 'Missing required fields' })
-    };
-    {
-      const newProduct = new Product({ name, price, image, brand, descrption, category });
+    // Initialize your images array first
+    const image1 = req.files?.image1 && req.files.image1[0];
+    const image2 = req.files?.image2 && req.files.image2[0];
+    const image3 = req.files?.image3 && req.files.image3[0];
+    const image4 = req.files?.image4 && req.files.image4[0];
 
-      await newProduct.save();
+    // Create an array of images
+    const images = [image1, image2, image3, image4].filter((item) => item !== undefined);
 
-      res.status(201).json({ message: 'product submitted successfully', newProduct })
-    };
+    // Upload images to Cloudinary and retrieve secure URLs
+    let imageUrls = await Promise.all(images.map(async (item) => {
+      const result = await cloudinary.uploader.upload(item.path, {
+        resource_type: "image"  // Corrected 'resourctype' to 'resource_type'
+      });
+      return result.secure_url;  // Return the secure URL
+    }));
+
+    console.log(imageUrls);
+
+    const parsedPrice = Number(price);
+
+    const parsedBestSeller = bestSeller === 'true' ? true : false;
+
+     const parsedSize = size ? JSON.parse(size) : size;
+
+    const newProduct = new Product({
+      name,
+      price: parsedPrice,  
+      images: imageUrls,
+      bestSeller: parsedBestSeller,  
+      size: parsedSize, 
+      description,  
+      category,
+      day: today 
+    });
+
+    // Save the new product to the database
+    await newProduct.save();
+
+    res.status(201).json({ message: 'Product submitted successfully', newProduct });
+
   } catch (error) {
     console.error('Error saving product:', error);
     res.status(500).json({ error: 'Failed to submit product' });
   }
 };
-export { Products }
+
 // for delet
 const deleteProduct = async (req, res) => {
   try {
@@ -39,15 +68,14 @@ const deleteProduct = async (req, res) => {
     const deletedProduct = await Product.findByIdAndDelete(productId);
 
     if (deletedProduct) {
-      res.status(200).json({ message: 'Product deleted successfully' });
+      res.status(200).json({succes:true, message: 'Product deleted successfully' });
     } else {
-      res.status(404).json({ message: 'Product not found' });
+      res.status(404).json({ success:false,message: 'Product not found' });
     }
   } catch (error) {
     res.status(500).json({ message: 'Error deleting product' });
   }
 };
-export { deleteProduct }
 //update
 const updateProduct = async (req, res) => {
   try {
@@ -63,7 +91,6 @@ const updateProduct = async (req, res) => {
     res.status(500).json({ message: 'Error updating product' });
   }
 };
-export { updateProduct }
 
 //forget to update
 const getProductById = async (req, res) => {
@@ -80,58 +107,8 @@ const getProductById = async (req, res) => {
     res.status(500).json({ message: 'Error fetching product' });
   }
 };
-export { getProductById }
 
-const Search = async (req, res) => {
-  const { searchText, name, brand, category, priceMin, priceMax, price } = req.query;
-
-  let query = {};
-
-  // Handling 'searchText' to match with 'name', 'brand', or 'category'
-  if (searchText) {
-    query.$or = [
-      { name: { $regex: searchText, $options: 'i' } },
-      { brand: { $regex: searchText, $options: 'i' } },
-      { category: { $regex: searchText, $options: 'i' } }
-    ];
-  }
-
-  // Handling specific fields if searchText is not provided
-  if (name) {
-    query.name = { $regex: name, $options: 'i' };
-  }
-  if (brand) {
-    query.brand = brand; // Assuming exact match for brand
-  }
-  if (category) {
-    query.category = category; // Assuming exact match for category
-  }
-
-  // Handling 'price' with range if both min and max are provided
-  if (priceMin || priceMax) {
-    query.price = {};
-    if (priceMin) {
-      query.price.$gte = parseFloat(priceMin);
-    }
-    if (priceMax) {
-      query.price.$lte = parseFloat(priceMax);
-    }
-  } else if (price) {
-    // If only a single price is provided (not a range)
-    query.price = parseFloat(price);
-  }
-
-  try {
-    const products = await Product.find(query);
-    res.json(products);
-  } catch (error) {
-    res.status(500).json({ message: 'Error searching products', error: error.message });
-  }
-};
-
-export { Search };
-
-const broductDetail = async (req, res) => {
+const productDetail = async (req, res) => {
   const productId = req.params.id;
   const product = await Product.findById(productId);
 
@@ -141,4 +118,4 @@ const broductDetail = async (req, res) => {
     res.status(404).json({ message: 'Product not found' });
   }
 };
-export { broductDetail }
+export {AddProducts, productDetail ,ListProducts,deleteProduct,updateProduct,getProductById}

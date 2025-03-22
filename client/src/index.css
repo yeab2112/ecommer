@@ -6,7 +6,10 @@
 .nav-link.active hr {
     @apply block border-b-2 border-blue-500;
   }
-  
+::-webkit-scrollbar {
+  display: none;
+}
+
   /* Hide underline for non-active links */z
   .nav-link hr {
     @apply hidden;

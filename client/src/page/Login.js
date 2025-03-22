@@ -1,123 +1,117 @@
-import '../asset/form.css'
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { AuthContext } from '../App'; 
-import { Auth } from '../App';
-function Login({}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('user');
-  const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext); 
-   const {setRole} =useContext(Auth)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://127.0.0.1:5000/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, userType }),
-      });
+import React, { useState } from 'react';
 
-      if (response.ok) {
-        toast.success('Login successful', {
-          position: 'top-right',
-          autoClose: 5000,
-        });
+const AuthPage = () => {
+  const [isLogin, setIsLogin] = useState(true);
 
-        const data = await response.json();
-        const token = data.token;
-        const user = data.userA;
-        const role= data.role
-        localStorage.setItem('token', token);
-      setRole(role)
-        setUser(user); 
-        if (userType === 'admin') {
-          navigate('/admin');
-          setRole("admin")
-
-        } else {
-          navigate('/');
-        }
-        console.log(user);
-      } else {
-        const errorData = await response.json();
-        console.log(errorData);
-        toast.error(errorData.message || 'Login failed', {
-          position: 'top-right',
-          autoClose: 5000,
-        });
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      toast.error('An error occurred during login', {
-        position: 'top-right',
-        autoClose: 5000,
-      });
-    }
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
   };
 
   return (
-    <div className="form-continer">
-      <form onSubmit={handleSubmit} className="formm">
-        <h2>Login</h2>
-        <div className="form-group">
-          <label htmlFor="email" className="form-label">
-            Email:
-          </label>
-          <input
-            autoComplete="off"
-            className="form-control"
-            type="email"
-            id="email"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label htmlFor="name" className="form-label">
-            Password:
-          </label>
-          <input
-            autoComplete="off"
-            className="form-control"
-            type="text"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <label htmlFor="name" className="form-label">
-          ROLE:
-        </label>
-        <select
-          className="form-control"
-          name="roll"
-          id="roll"
-          onChange={(e) => setUserType(e.target.value)}
-          required
-        >
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-3xl font-bold text-center mb-6">
+          {isLogin ? 'Login' : 'Signup'}
+        </h2>
 
-        <button type="submit" className="form-button">
-          Login
-        </button>
-        <p>
-        <Link to="/forget-password" className="log">
-            Forget password
-          </Link>
-          </p>
-          <p>
-          I have'nt an account?
-          <Link to="/signup" className="log">
-            Signup
-          </Link>
-        </p>
-      </form>
+        {isLogin ? (
+          <LoginForm />
+        ) : (
+          <SignupForm />
+        )}
+
+        {/* Toggle link for signup/login */}
+        <div className="text-center mt-4">
+          <button
+            onClick={toggleForm} // Ensure toggle happens only when button is clicked
+            className="focus:outline-none"
+          >
+            {isLogin ? (
+              <span>
+                Don't have an account?{' '}
+                <span className="text-blue-500 cursor-pointer hover:underline">
+                  Sign up
+                </span>
+              </span>
+            ) : (
+              <span>
+                Already have an account?{' '}
+                <span className="text-blue-500 cursor-pointer hover:underline">
+                  Log in
+                </span>
+              </span>
+            )}
+          </button>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default Login;
+const LoginForm = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle login logic here (send login request to backend)
+  };
 
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <input
+        type="email"
+        placeholder="Email"
+        required
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        required
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+      >
+        Login
+      </button>
+    </form>
+  );
+};
+
+const SignupForm = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle signup logic here (send signup request to backend)
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <input
+        type="text"
+        placeholder="Name"
+        required
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        required
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        required
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+      >
+        Sign up
+      </button>
+    </form>
+  );
+};
+
+export default AuthPage;

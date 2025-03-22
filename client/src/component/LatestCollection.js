@@ -32,9 +32,7 @@ function LatestCollection() {
     ${(product.price)}
   </p>
 )}
-
-
-            </Link>
+ </Link>
           ))
         ) : (
           <p className="text-center text-gray-600 col-span-full">
